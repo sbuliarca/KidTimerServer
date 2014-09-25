@@ -6,22 +6,14 @@ class OverrideController {
 
   @Transactional
   def consume() {
-    List<BlockUsage> notConsumedBlocks = BlockUsage.findAllWhere(consumed: false)
-    /*  mark consumes these new ones  */
-    for (BlockUsage block : notConsumedBlocks) {
-      block.consumed = true
-      block.save()
+    List<RemoteOverride> notConsumedOverrides = RemoteOverride.findAllByConsumed(false, [sort: "dateCreated", order: "desc"])
+    /*  mark consumed these new ones  */
+    for (RemoteOverride override : notConsumedOverrides) {
+      override.consumed = true
+      override.save()
     }
 
-    List<GrantUsage> notConsumedGrants = GrantUsage.findAllWhere(consumed: false)
-    /*  mark consumes these new ones  */
-    for (GrantUsage grant : notConsumedGrants) {
-      grant.consumed = true
-      grant.save()
-    }
-
-    def aggregatedMap = [blocks: notConsumedBlocks, grants: notConsumedGrants]
-    respond aggregatedMap
+    respond notConsumedOverrides[0]
   }
 
 }
