@@ -26,7 +26,8 @@
 <div class="content"><g:formatDate date="${lastLogEntry.dateCreated}"/>: ${lastLogEntry.message}</div>
 <div class="nav" role="navigation">
     <ul>
-        <li><g:link controller="remoteOverride" action="saveFromParams" method="GET" params="[type: 'DENY', minutes: 10]" >Block 10</g:link></li>
+        <li><g:link controller="remoteOverride" action="saveFromParams" method="GET" params="[type: 'DENY', minutes: 60]" >Block 60</g:link></li>
+        <li><g:link controller="remoteOverride" action="saveFromParams" method="GET" params="[type: 'ALLOW', minutes: 15]" >Allow 15</g:link></li>
     </ul>
 </div>
 
