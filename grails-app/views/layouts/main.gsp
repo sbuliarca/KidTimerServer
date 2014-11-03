@@ -1,3 +1,4 @@
+<%@ page import="com.bullsora.kidtimer.LogEntry" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -21,6 +22,14 @@
 <body>
 <div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png"
                                                                             alt="Grails"/></a></div>
+<g:set var="lastLogEntry" value="${LogEntry.listOrderByDateCreated(max: 1, offset: 0, order: "desc")[0]}" />
+<div class="content"><g:formatDate date="${lastLogEntry.dateCreated}"/>: ${lastLogEntry.message}</div>
+<div class="nav" role="navigation">
+    <ul>
+        <li><g:link controller="remoteOverride" action="saveFromParams" method="GET" params="[type: 'DENY', minutes: 10]" >Block 10</g:link></li>
+    </ul>
+</div>
+
 <g:layoutBody/>
 <div class="footer" role="contentinfo"></div>
 

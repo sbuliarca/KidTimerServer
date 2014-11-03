@@ -1,12 +1,9 @@
-import com.bullsora.kidtimer.BlockUsage
-import com.bullsora.kidtimer.GrantUsage
+import com.bullsora.kidtimer.LogEntry
 
 class BootStrap {
 
   def init = { servletContext ->
-    new BlockUsage(minutes: 15).save()
-    new GrantUsage(minutes: 12).save()
-
+    new LogEntry(message: "for testing purposes").save()
   }
 
   def destroy = {
